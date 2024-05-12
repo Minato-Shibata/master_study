@@ -1,0 +1,14 @@
+void calib(){
+ gROOT->Reset();
+
+  double x,y;
+  gStyle->SetOptLogy(1);
+  TH1D *original= new TH1D("calib","calib",32768,-0.5,32767.5);
+ 
+  ifstream data;
+  data.open("data/20170210Cs_008_eh_0.dat"); 
+  while(data>>x>>y) original->Fill(x,y);
+  original->Fit("gaus","","",20,185);
+  original->Draw();
+
+}
